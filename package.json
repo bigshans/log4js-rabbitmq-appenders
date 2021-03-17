@@ -4,6 +4,7 @@
   "description": "An appenders using rabbitmq to push message for log4js",
   "main": "index.js",
   "repository": "https://github.com/bigshans/log4js-rabbitmq-appenders",
+  "homepage": "https://github.com/bigshans/log4js-rabbitmq-appenders",
   "author": "bigshans",
   "license": "MIT",
   "dependencies": {
