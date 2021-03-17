@@ -1,3 +1,3 @@
 module.exports = {
-  ...require('./lib/index'),
+  RabbitmqAppenders: require('./lib/index'),
 };

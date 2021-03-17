@@ -1,6 +1,6 @@
 {
   "name": "log4js-rabbitmq-appenders",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An appenders using rabbitmq to push message for log4js",
   "main": "index.js",
   "repository": "https://github.com/bigshans/log4js-rabbitmq-appenders",
@@ -8,7 +8,9 @@
   "author": "bigshans",
   "license": "MIT",
   "dependencies": {
-    "amqplib": "^0.7.1",
+    "amqplib": "^0.7.1"
+  },
+  "devDependencies": {
     "log4js": "^6.3.0"
   }
 }

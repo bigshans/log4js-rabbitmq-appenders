@@ -1,10 +1,10 @@
 const log4js = require('log4js');
-const rabbitmq = require('./lib/index');
+const { RabbitmqAppenders } = require('./index');
 
 log4js.configure({
   appenders: {
     mq: {
-      type: rabbitmq,
+      type: RabbitmqAppenders,
       host: '127.0.0.1',
       port: 5672,
       username: '',

@@ -23,14 +23,16 @@ The appender will use the RabbitMQ Routing model command to send the log event m
 
 ## Example
 
+CommonJS:
+
 ```javascript
 const log4js = require('log4js');
-const appenders = require('log4js-rabbitmq-appenders');
+const { RabbitmqAppenders } = require('log4js-rabbitmq-appenders');
 
 log4js.configure({
   appenders: {
     mq: {
-      type: appenders,
+      type: RabbitmqAppenders,
       host: '127.0.0.1',
       port: 5672,
       username: '',
@@ -47,3 +49,32 @@ log4js.configure({
 const log = log4js.getLogger();
 log.info('hello');
 ```
+
+TypeScript:
+
+```typescript
+import { configure, getLogger } from 'log4js';
+import { RabbitmqAppenders } from 'log4js-rabbitmq-appenders';
+
+configure({
+      appenders: {
+        mq: {
+          type: RabbitmqAppenders,
+          host: '127.0.0.1',
+          port: 5672,
+          username: '',
+          password: '',
+          routing_key: 'log',
+          exchange: 'log',
+          mq_type: 'direct',
+          durable: true,
+          timeout: 100000,
+        }
+      },
+      categories: { default: { appenders: ['mq'], level: 'info' } }
+});
+
+const logger = getLogger();
+logger.info('hello');
+```
+
