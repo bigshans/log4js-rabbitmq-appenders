@@ -49,7 +49,7 @@ log4js.configure({
       formatter(loggingEvent, layout) {
         return JSON.stringify(
           {
-            level: loggingEvent.levelStr, data: layout(loggingEvent),
+            level: loggingEvent.level.levelStr, data: layout(loggingEvent),
             categoryName: loggingEvent.categoryName,
           }
         );
@@ -88,7 +88,7 @@ configure({
       },
       formatter(loggingEvent: any, layout: any) {
         return JSON.stringify({
-          level: loggingEvent.levelStr,
+          level: loggingEvent.level.levelStr,
           data: layout(loggingEvent),
           categoryName: loggingEvent.categoryName,
         });

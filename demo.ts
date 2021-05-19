@@ -20,7 +20,7 @@ configure({
       },
       formatter(loggingEvent: any, layout: any) {
         return JSON.stringify({
-          level: loggingEvent.levelStr,
+          level: loggingEvent.level.levelStr,
           data: layout(loggingEvent),
           categoryName: loggingEvent.categoryName,
         });

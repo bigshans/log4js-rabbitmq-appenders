@@ -20,7 +20,7 @@ log4js.configure({
       formatter(loggingEvent, layout) {
         return JSON.stringify(
           {
-            level: loggingEvent.levelStr, data: layout(loggingEvent),
+            level: loggingEvent.level.levelStr, msg: layout(loggingEvent),
             categoryName: loggingEvent.categoryName,
           }
         );
@@ -36,10 +36,14 @@ log4js.configure({
 
 const log = log4js.getLogger();
 
-log.info("hello");
-log.info("fuck");
-log.info("fuck");
-log.info("fuck");
-log.info("fuck");
-log.info("fuck");
-log.info('fu"c"k');
+log.info("hello" + 1);
+log.info("fuck" + 2);
+log.info("fuck" + 3);
+log.info("fuck" + 4);
+log.info("fuck" + 5);
+log.info("fuck" + 6);
+log.info('fu"c"k' + 7);
+
+(async () => log.info('punk1'))();
+(async () => log.info('punk2'))();
+(async () => log.info('punk3'))();
