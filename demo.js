@@ -13,11 +13,20 @@ log4js.configure({
       exchange: 'log',
       mq_type: 'direct',
       durable: true
+    },
+    out: {
+      type: 'console',
     }
   },
-  categories: { default: { appenders: ['mq'], level: 'info' } }
+  categories: { default: { appenders: ['mq', 'out'], level: 'info' } },
+  disableClustering: true,
 });
 
 const log = log4js.getLogger();
 
 log.info('hello');
+log.info('fuck');
+log.info('fuck');
+log.info('fuck');
+log.info('fuck');
+log.info('fuck');
