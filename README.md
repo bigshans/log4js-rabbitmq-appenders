@@ -18,6 +18,7 @@ Same as [@log4js-node/rabbitmq](https://github.com/log4js-node/rabbitmq) .
 - `vhost` - `string` (optional, defaults to `/`) - vhost to use
 - `layout` - `object` (optional, defaults to `messagePassThroughLayout`) - the layout to use for log events (see [layouts](https://github.com/log4js-node/rabbitmq/blob/master/layouts.md)).
 - `shutdownTimeout` - `integer` (optional, defaults to `10000`) - maximum time in milliseconds to wait for messages to be sent during log4js shutdown.
+- `formatter` - `function(loggingEvent, layout?) => string` (optional, default is `loggingEvent => layout(loggingEvent)`) - format function, default is `layout` . You can directly use `loggingEvent` or change result when call `layout` .
 
 The appender will use the RabbitMQ Routing model command to send the log event messages to the channel.
 
@@ -40,7 +41,19 @@ log4js.configure({
       routing_key: 'log',
       exchange: 'log',
       mq_type: 'direct',
-      durable: true
+      durable: true,
+      layout: {
+        type: "pattern",
+        pattern: '%m',
+      },
+      formatter(loggingEvent, layout) {
+        return JSON.stringify(
+          {
+            level: loggingEvent.levelStr, data: layout(loggingEvent),
+            categoryName: loggingEvent.categoryName,
+          }
+        );
+      },
     }
   },
   categories: { default: { appenders: ['mq'], level: 'info' } }
@@ -53,28 +66,40 @@ log.info('hello');
 TypeScript:
 
 ```typescript
-import { configure, getLogger } from 'log4js';
-import { RabbitmqAppenders } from 'log4js-rabbitmq-appenders';
+import { configure, getLogger } from "log4js";
+import { RabbitmqAppenders } from "log4js-rabbitmq-appenders";
 
 configure({
-      appenders: {
-        mq: {
-          type: RabbitmqAppenders,
-          host: '127.0.0.1',
-          port: 5672,
-          username: '',
-          password: '',
-          routing_key: 'log',
-          exchange: 'log',
-          mq_type: 'direct',
-          durable: true,
-          timeout: 100000,
-        }
+  appenders: {
+    mq: {
+      type: RabbitmqAppenders,
+      host: "127.0.0.1",
+      port: 5672,
+      username: "",
+      password: "",
+      routing_key: "log",
+      exchange: "log",
+      mq_type: "direct",
+      durable: true,
+      timeout: 100000,
+      layout: {
+        type: "pattern",
+        pattern: "%m",
       },
-      categories: { default: { appenders: ['mq'], level: 'info' } }
+      formatter(loggingEvent: any, layout: any) {
+        return JSON.stringify({
+          level: loggingEvent.levelStr,
+          data: layout(loggingEvent),
+          categoryName: loggingEvent.categoryName,
+        });
+      },
+    },
+  },
+  categories: { default: { appenders: ["mq"], level: "info" } },
 });
 
 const logger = getLogger();
-logger.info('hello');
+logger.info("hello");
+
 ```
 
