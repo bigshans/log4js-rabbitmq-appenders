@@ -1,0 +1,42 @@
+module.exports = {
+  env: {
+    es2021: true,
+    browser: true,
+    commonjs: true,
+    node: true,
+  },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 12,
+    projection: ['./tsconfig.json'],
+  },
+  extends: ['eslint:recommended', 'alloy', 'alloy/typescript', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier'],
+  rules: {
+    '@typescript-eslint/member-ordering': 'off',
+    '@typescript-eslint/no-dynamic-delete': 'error',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/space-infix-ops': ['error', { int32Hint: false }],
+    '@typescript-eslint/explicit-member-accessibility': 'off',
+    '@typescript-eslint/no-parameter-properties': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
+    curly: 'error',
+    'guard-for-in': 'off',
+    'no-magic-numbers': [
+      'off',
+      {
+        ignore: [1, 0, -1],
+      },
+    ],
+    camelcase: ['error', { properties: 'never' }],
+    'no-sequences': 'off',
+    'prefer-const': 'error',
+    radix: 'off',
+    'arrow-body-style': ['error', 'as-needed'],
+    'no-useless-return': 'error',
+    'no-implicit-coercion': 'off',
+    'no-throw-literal': 'error',
+    'no-useless-concat': 'off',
+  },
+};
